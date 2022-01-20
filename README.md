@@ -15,6 +15,9 @@ This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose &
  - Use [npm install] to install dependencies
  - Use [npm run dev] to run the application
 
+### Application URI
+http://localhost:5000/graphql
+
 ### Note
 Application uses port 5000, so make sure it's free, or change the port number in 
 config -> config.ts. :)
@@ -72,7 +75,8 @@ Input
 ```
 
 ### Join game 
-Can be used by player two to join the game, if it was created as multiplayer. Returnes game which player has joined.
+Can be used by player two to join the game, if it was created as multiplayer. Returnes game on which player has joined.
+
 Query
 ```
 mutation($input: JoinGameInput!) {
@@ -99,7 +103,7 @@ Input
 ```
 
 ### Make move 
-Used for making the game move. Saves game. Publishes latest game to the 'GAMES' topic. Returnes game object after the move. 
+Used for making the game move. Saves game. Publishes latest game to the 'GAMES' topic. Returnes game object after the made move. 
 
 Query
 ```
@@ -132,6 +136,8 @@ Input
 
 ### Get game history 
 Used for the insight of previous game moves and statuses. Returnes an array of games for the provided game id.
+
+Query
 ```
 query {
   getGameHistory(gameId: "validGameId") {
@@ -145,6 +151,7 @@ query {
 
 ## Subscription 
 Should be used to access live game information that is produced when players are making new moves. This one wasn't tested so it might not work. :)
+
 Subscription
 ```
 subscription{
