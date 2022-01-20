@@ -27,6 +27,7 @@ config -> config.ts. :)
 
 ### Healthcheck 
 // Can be used to check if the application has successfully started. 
+
 Query
 ```
 query{
