@@ -162,37 +162,48 @@ subscription{
 ```
 
 ## Complete GraphQL Schema
+```
 type Query {
   healthcheck: String!
   getGameHistory(gameId: String!): [GameHistory!]!
 }
+```
 
+```
 type GameHistory {
   _id: ID!
   gameStatus: GameStatus!
   board: [[String!]!]!
   winner: Winner!
 }
+```
 
+```
 enum GameStatus {
   CREATED
   IN_PROGRESS
   FINISHED
 }
+```
 
+```
 enum Winner {
   TIE
   X
   O
   NONE
 }
+```
 
+```
 type Mutation {
   createGame(input: CreateGameInput!): Game!
   joinGame(input: JoinGameInput!): Game!
   makeMove(input: MakeMoveInput!): Game!
 }
+```
 
+```
 type Game {
   _id: ID!
   playerName1: String!
@@ -202,41 +213,56 @@ type Game {
   board: [[String!]!]!
   winner: Winner!
 }
+```
 
+```
 input CreateGameInput {
   playerName1: String!
   isSingleplayer: Boolean!
 }
+```
 
+```
 input JoinGameInput {
   gameId: String!
   playerName2: String!
 }
+```
 
+```
 input MakeMoveInput {
   gameId: String!
   ticToe: TicToe!
   move: Move!
 }
+```
 
+```
 enum TicToe {
   X
   O
 }
+```
 
+```
 input Move {
   coordinateX: Int!
   coordinateY: Int!
 }
+```
 
+```
 type Subscription {
   getLiveResults: GamePayload!
 }
+```
 
+```
 type GamePayload {
   id: Int!
   message: String
 }
+```
 
 ## Future work ideas
 - Optimize gameplay algorithms. Current implementation consists of nested loops which should be replaced with a better solution.
