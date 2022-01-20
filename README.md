@@ -1,13 +1,13 @@
 # Tic-Tac-Toe API with TypeGraphQL, TypeGoose, TypeScript and Apollo Server
 
 ### About
-This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose, TypeScript and Apollo Server. It supports both singleplayer and multiplayer mode. Singleplayer mode uses Minmax algorithm to generate opponent's moves. This solution does not have integrated database. Data is stored in map objects.
+This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose, TypeScript and Apollo Server. It supports both singleplayer and multiplayer mode. Singleplayer mode uses Minimax algorithm to generate opponent's moves. This solution does not have integrated database. Data is stored in map objects.
 
 ### References
 * [TypeGraphQL](https://typegraphql.com/)
 * [TypeGoose](https://typegoose.github.io/typegoose/)
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
-* [Minmax](https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/)
+* [Minimax](https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/)
 
 ### Prerequisites
  - node, npm (https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
