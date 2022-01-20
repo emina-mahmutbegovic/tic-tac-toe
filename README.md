@@ -21,9 +21,9 @@ config -> config.ts. :)
 
 ---
 
-### Gameplay
+## Gameplay
 
-## Queries & mutations
+### Queries & mutations
 
 ### Healthcheck 
 Can be used to check if the application has successfully started. 
