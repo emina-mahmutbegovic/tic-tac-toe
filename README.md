@@ -16,7 +16,7 @@ This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose, 
  - Use [npm install] to install dependencies
  - Use [npm run dev] to run the application
 
-### Application URI
+### Application URL
 http://localhost:5000/graphql
 
 ### Note
