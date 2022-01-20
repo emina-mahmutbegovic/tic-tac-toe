@@ -20,8 +20,8 @@ This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose, 
 http://localhost:5000/graphql
 
 ### Note
-Application uses port 5000, so make sure it's free, or change the port number in 
-config -> config.ts. Configure the port number in the URI above accordingly. :)
+Application uses port 5000, so make sure it iss free, or change the port number in 
+config -> config.ts. Configure the port number in the URI above accordingly.
 
 ---
 
@@ -104,7 +104,7 @@ Input
 ```
 
 ### Make move 
-Used for making the game move. Saves game. Publishes latest game to the 'GAMES' topic. Returnes game object after the made move. 
+Used for making the game move. Saves game. Publishes latest game to the GAMES topic. Returnes game object after the made move. 
 
 Query
 ```
@@ -126,7 +126,7 @@ Input
 { "input": 
   {
       "gameId": "someGameId", # valid _id from the existing game must be provided
-      "ticToe": "X", # can be 'X' for singleplayer and 'X' or 'O' for multiplayer mode. 
+      "ticToe": "X", # can be X for singleplayer and X or O for multiplayer mode. 
       "move": { # board coordinates. Board is represented as a matrix. 
         "coordinateX": 0,
         "coordinateY": 1
@@ -151,7 +151,7 @@ query {
 ```
 
 ## Subscription 
-Should be used to access live game information that is produced when players are making new moves. This one wasn't tested so it might not work. :)
+Should be used to access live game information that is produced when players are making new moves. This one was not tested so it might not work.
 
 Subscription
 ```
