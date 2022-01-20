@@ -76,7 +76,7 @@ Input
 ```
 
 ### Join game 
-Can be used by player two to join the game, if it was created as multiplayer. Returnes game on which player has joined.
+Can be used by player two to join the game, if it was created as multiplayer. Returns game on which player has joined.
 
 Query
 ```
@@ -104,7 +104,7 @@ Input
 ```
 
 ### Make move 
-Used for making the game move. Saves game. Publishes latest game to the GAMES topic. Returnes game object after the made move. 
+Used for making the game move. Saves game. Publishes latest game to the GAMES topic. Returns game object after the made move. 
 
 Query
 ```
@@ -136,7 +136,7 @@ Input
 ```
 
 ### Get game history 
-Used for the insight of previous game moves and statuses. Returnes an array of games for the provided game id.
+Used for the insight of previous game moves and statuses. Returns an array of games for the provided game id.
 
 Query
 ```
