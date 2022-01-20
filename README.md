@@ -21,7 +21,7 @@ http://localhost:5000/graphql
 
 ### Note
 Application uses port 5000, so make sure it iss free, or change the port number in 
-config -> config.ts. Configure the port number in the URI above accordingly.
+config -> config.ts. Configure the port number in the URL above accordingly.
 
 ---
 
