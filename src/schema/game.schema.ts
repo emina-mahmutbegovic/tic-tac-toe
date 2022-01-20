@@ -3,8 +3,7 @@ import {
   } from "@typegoose/typegoose";
 import { Field, ObjectType, ID, Int } from "type-graphql";
 import { GameStatus } from "../enums/game-status.enum";
-import { TicToe } from "../enums/tic-toe.enum";
-import { Player } from "../resolvers/types/player";
+import { Winner } from "../enums/winner.enum";
   
 @ObjectType()
 export class Game {
@@ -25,11 +24,9 @@ export class Game {
     @Field(() => GameStatus)
     gameStatus: GameStatus;
 
-    @Field(() => [[Int]])
-    board: number[][];
+    @Field(() => [[String]])
+    board: string[][];
   
-    @Field(() => TicToe)
-    winner: TicToe;
+    @Field(() => Winner)
+    winner: Winner;
 }
-  
-//export const GameModel = getModelForClass<typeof Game>(Game);

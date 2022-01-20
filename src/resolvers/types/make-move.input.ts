@@ -1,5 +1,6 @@
 import { InputType, Field, Int } from 'type-graphql';
 import { TicToe } from '../../enums/tic-toe.enum';
+import { Move } from '../../models/move';
     
 @InputType()
 export class MakeMoveInput {
@@ -9,9 +10,6 @@ export class MakeMoveInput {
     @Field(() => TicToe)
     ticToe: TicToe;
 
-    @Field(() => Int)
-    coordinateX: number;
-
-    @Field(() => Int)
-    coordinateY: number;
+    @Field(() => Move)
+    move: Move;
 }

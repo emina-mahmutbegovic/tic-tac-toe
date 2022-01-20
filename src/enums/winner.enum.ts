@@ -1,8 +1,10 @@
 import { registerEnumType } from "type-graphql";
 
 export enum Winner {
-    X = 10,
-    O = -10
+    TIE = "-",
+    X = "X",
+    O = "O",
+    NONE = "_"
 }
 
 registerEnumType(Winner, {

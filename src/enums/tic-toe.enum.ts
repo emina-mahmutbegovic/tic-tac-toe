@@ -1,10 +1,8 @@
 import { registerEnumType } from "type-graphql";
 
 export enum TicToe {
-    TIE,
-    X,
-    O,
-    UNDEFINED
+    X = "X",
+    O = "O",
 }
 
 registerEnumType(TicToe, {

@@ -1,7 +1,6 @@
 import { MinLength, MaxLength } from 'class-validator';
 import { InputType, Field } from 'type-graphql';
 import { Game } from '../../schema/game.schema';
-import { Player } from './player';
 
 @InputType()
 export class CreateGameInput implements Partial<Game> {

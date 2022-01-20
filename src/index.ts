@@ -1,46 +1,40 @@
-import dotenv from "dotenv";
-dotenv.config();
-import "reflect-metadata";
-import express from "express";
-import { buildSchema } from "type-graphql";
-import { ApolloServer } from "apollo-server-express";
-import { 
-  ApolloServerPluginLandingPageGraphQLPlayground
-} from "apollo-server-core";
-import { connectToMongo } from "./utils/mongo";
-import { Container } from "typedi";
-import GameResolver from "./resolvers/game.resolver";
+import 'reflect-metadata';
+import express from 'express';
+import { buildSchema } from 'type-graphql';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { Container } from 'typedi';
+import GameResolver from './resolvers/game.resolver';
+import config from '../config/config';
+import logger from '../config/logger';
+import { ApolloServer } from 'apollo-server-express';
+
+const NAMESPACE = 'Server';
 
 async function bootstrap() {
-  // Build the schema
-  const schema = await buildSchema({
-    resolvers: [GameResolver],
-    container: Container
-  });
+    // Build the schema
+    const schema = await buildSchema({
+        resolvers: [GameResolver],
+        container: Container
+    });
 
-  // Init express
-  const app = express();
+    // Init express
+    const app = express();
 
-  // Create the apollo server
-  const server = new ApolloServer({
-    schema,
-    plugins: [
-    ApolloServerPluginLandingPageGraphQLPlayground()
-    ]
-  });
+    // Create the apollo server
+    const server = new ApolloServer({
+        schema,
+        plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
+    });
 
-  await server.start();
+    await server.start();
 
-  // Apply middleware to server
-  server.applyMiddleware({ app });
+    // Apply middleware to server
+    server.applyMiddleware({ app });
 
-  // app.listen on express server
-  app.listen({ port: 5000 }, () => {
-    console.log("App is listening on http://localhost:5000");
-  });
-
-  //Connect to Mongo DB
-  connectToMongo();
+    // app.listen on express server
+    app.listen({ port: config.server.port }, () => {
+        logger.info(NAMESPACE, `Server is running on ${config.server.hostname}:${config.server.port}`);
+    });
 }
 
 bootstrap();

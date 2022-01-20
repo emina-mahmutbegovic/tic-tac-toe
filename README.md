@@ -1,42 +1,85 @@
-# GraphQL API with TypeGraphQL, TypeGoose & TypeScript
+# Tic-Tac-Toe API with TypeGraphQL, TypeGoose & TypeScript
 
-### What technology are we using?
+### About
+This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose & TypeScript. It supports both singleplayer and multiplayer mode. Singleplayer mode uses Minmax algorithm to generate opponent's moves. 
+
+### References
 * [TypeGraphQL](https://typegraphql.com/)
 * [TypeGoose](https://typegoose.github.io/typegoose/)
+* [Minmax](https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/)
 
+### Requirements
+ - node, npm (https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-### Who is this tutorial for?
-* Those familiar with NodeJs
-* Those wanting to learn GraphQL
-* Those wanting to learn TypeScript
+### Running the application
+ - Use [npm install] to install dependencies
+ - Use [npm run dev] to run the application
 
-### I don't know GraphQL, should I watch this video?
-* TypeGraphQL is to GraphQL what TypeScript is to JavaScript
-* You might get a bit confused, the syntax used is weird
-* You should get a basic understanding of GraphQL first
-* I'll do a walk-through and explain the code first
-
-### Why TypeGraphQL?
-TypeGraphQL reduced boilerplate. Without it, you have to update schema, data models, resolvers & type definitions. With TypeGraphQL, you only need to update resolvers and data models.
-
-### WTF is an decorator?
-A Decorator is a special kind of declaration that can be attached to a class declaration, method, accessor, property, or parameter. Decorators use the form @expression, where expression must evaluate to a function that will be called at runtime with information about the decorated declaration.
-
-Reference: https://www.typescriptlang.org/docs/handbook/decorators.html#accessor-decorators
-
-
+### Note
+Application uses port 5000, so make sure it's free, or change the port number in 
+config -> config.ts. :)
 
 ---
 
+### Gameplay
+
 ## Queries & mutations
-### Create user
+
+### Healthcheck // Can be used to check if the application has successfully started. 
 Query
 ```
-mutation createUser($input: CreateUserInput!){
-  createUser(input: $input) {
-    email
+query{
+  healthcheck
+}
+```
+
+Response
+```
+{
+  "data": {
+    "healthcheck": "App sucessfully running!"
+  }
+}
+```
+
+### Create game // Used for the game creation. Based on the input, it can be singleplayer or multiplayer. Returnes created game.
+
+Query
+```
+mutation($input: CreateGameInput!) {
+  createGame(input: $input) {
     _id
-    name
+    playerName1
+    playerName2
+    isSingleplayer
+    gameStatus
+    board
+    winner
+  }
+}
+```
+Input
+```
+{
+  "input": {
+    "playerName1": "string", 
+    "isSingleplayer": false  # Should be set to true or false. This parameter is used as a switch between singleplayer and multiplayer modes.
+  }
+}
+```
+
+### Join game // Can be used by player two to join the game, if it was created as multiplayer. Returnes game which player has joined.
+Query
+```
+mutation($input: JoinGameInput!) {
+  joinGame(input: $input) {
+    _id
+    playerName1
+    playerName2
+    isSingleplayer
+    gameStatus
+    board
+    winner
   }
 }
 ```
@@ -44,101 +87,62 @@ mutation createUser($input: CreateUserInput!){
 Input
 ```
 {
-  "input": {
-    "email": "1@example.com",
-    "name": "Jane Doe",
-    "password": "password"
+  "input": { 
+    "gameId": "someGameId", //_id parameter which was returned by createGame mutation 
+    "playerName2": "string2" // must differ from playerName1, otherwise, mutation throws an error
   }
 }
 ```
 
-### Get current user
+### Make move // Used for making the game move. Saves game. Publishes latest game to the 'GAMES' topic. Returnes game object after the move. 
+
 Query
+```
+mutation($input: MakeMoveInput!) {
+  makeMove(input: $input) {
+    _id
+    playerName1
+    playerName2
+    isSingleplayer
+    gameStatus
+    board
+    winner
+  }
+}
+```
+
+Input
+```
+{ "input": 
+  {
+      "gameId": "someGameId", // valid _id from the existing game must be provided
+      "ticToe": "X", // can be 'X' for singleplayer and 'X' or 'O' for multiplayer mode. 
+      "move": { // board coordinates. Board is represented as a matrix. 
+        "coordinateX": 0,
+        "coordinateY": 1
+      }
+  }
+}
+```
+
+### Get game history // Used for the insight of previous game moves and statuses. Returnes an array of games for the provided game id.
 ```
 query {
-  me {
+  getGameHistory(gameId: "validGameId") {
     _id
-    name
-    email
+    gameStatus
+    board
+    winner
   }
 }
 ```
 
-### Login
-Query
+## Subscription // Should be used to access live game information that is produced when players are making new moves. This one wasn't tested so it might not work. :)
+Subscription
 ```
-mutation login($input: LoginInput!){
-  login(input: $input) 
-}
-```
-
-Input
-```
-{
-  "input": {
-    "email": "1@example.com",
-    "password": "password"
-  }
-}
-```
-
-### Create a product
-Query
-```
-mutation createProduct($input: CreateProductInput!){
-  createProduct(input: $input){
-    _id
-    price
-    productId
-    name
-    description
-  }
-}
-```
-
-Input
-```
-{
-  "input": {
-    "name": "A test product111",
-    "description": "blah blah blah blah blah blahblah blah blahblah blah blahblah blah blahblah blah blahblah blah blah",
-    "price": 24.99
-    
-  }
-}
-```
-
-### Get products
-```
-query products {
-  products {
-    productId
-    name
-    description
-    productId
-  }
-}
-```
-
-### Get a single product
-Query
-```
-query product($input: GetProductInput!) {
-  product(input: $input) {
-    _id
-    productId
-    price
-    name
-    description
-  }
-}
-```
-
-Input
-```
-{
-  "input": {
-    "productId": "product_23cn3k61h8"
+subscription{
+  getLiveResults{
+    message
   }
 }
 ```
