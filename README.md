@@ -20,7 +20,7 @@ This basic Tic-Tac-Toe API was implemented with NodeJs, TypeGraphQL, TypeGoose, 
 http://localhost:5000/graphql
 
 ### Note
-Application uses port 5000, so make sure it iss free, or change the port number in 
+Application uses port 5000 so make sure it is free, or change the port number in 
 config -> config.ts. Configure the port number in the URL above accordingly.
 
 ---
