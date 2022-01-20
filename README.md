@@ -25,7 +25,8 @@ config -> config.ts. :)
 
 ## Queries & mutations
 
-### Healthcheck // Can be used to check if the application has successfully started. 
+### Healthcheck 
+// Can be used to check if the application has successfully started. 
 Query
 ```
 query{
@@ -42,7 +43,8 @@ Response
 }
 ```
 
-### Create game // Used for the game creation. Based on the input, it can be singleplayer or multiplayer. Returnes created game.
+### Create game 
+// Used for the game creation. Based on the input, it can be singleplayer or multiplayer. Returnes created game.
 
 Query
 ```
@@ -68,7 +70,8 @@ Input
 }
 ```
 
-### Join game // Can be used by player two to join the game, if it was created as multiplayer. Returnes game which player has joined.
+### Join game 
+// Can be used by player two to join the game, if it was created as multiplayer. Returnes game which player has joined.
 Query
 ```
 mutation($input: JoinGameInput!) {
@@ -94,7 +97,8 @@ Input
 }
 ```
 
-### Make move // Used for making the game move. Saves game. Publishes latest game to the 'GAMES' topic. Returnes game object after the move. 
+### Make move 
+// Used for making the game move. Saves game. Publishes latest game to the 'GAMES' topic. Returnes game object after the move. 
 
 Query
 ```
@@ -125,7 +129,8 @@ Input
 }
 ```
 
-### Get game history // Used for the insight of previous game moves and statuses. Returnes an array of games for the provided game id.
+### Get game history 
+// Used for the insight of previous game moves and statuses. Returnes an array of games for the provided game id.
 ```
 query {
   getGameHistory(gameId: "validGameId") {
@@ -137,7 +142,8 @@ query {
 }
 ```
 
-## Subscription // Should be used to access live game information that is produced when players are making new moves. This one wasn't tested so it might not work. :)
+## Subscription 
+// Should be used to access live game information that is produced when players are making new moves. This one wasn't tested so it might not work. :)
 Subscription
 ```
 subscription{
